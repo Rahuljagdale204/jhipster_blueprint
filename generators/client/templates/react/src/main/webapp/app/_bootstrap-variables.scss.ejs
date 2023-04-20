@@ -1,0 +1,316 @@
+<%#
+ Copyright 2013-2019 the original author or authors from the JHipster project.
+
+ This file is part of the JHipster project, see https://www.jhipster.tech/
+ for more information.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-%>
+/*
+* Bootstrap overrides https://v4-alpha.getbootstrap.com/getting-started/options/
+* All values defined in bootstrap source
+* https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss can be overwritten here
+* Make sure not to add !default to values here
+*/
+<%_ if (clientTheme === 'nova-light'||clientTheme === 'none') { _%>
+     $primary: #005b9f;
+     $secondary: #c8c8c8;
+     $success: #34A835;
+     $info: #005b9f;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     
+     // Body
+     $body-bg: #ffff;
+     $body-color: #495057;
+     
+     // Fonts
+     
+     $headings-color: #5c5c5c;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: $body-color;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+
+<%_ if (clientTheme === 'nova-dark') { _%>
+     $primary: #007ad9;
+     $secondary: #c8c8c8;
+     $success: #34A835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     
+     // Body
+     $body-bg: #ffff;
+     $body-color: #495057;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: $body-color;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'nova-dark') { _%>
+     $primary: #007ad9;
+     $secondary: #c8c8c8;
+     $success: #34A835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #333333;
+     
+     // Body
+     $body-bg: #ffff;
+     $body-color: #495057;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: $body-color;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'nova-colored') { _%>
+     $primary: #e02365;
+     $secondary: #c8c8c8;
+     $success: #34A835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #007ad9;
+     
+     // Body
+     $body-bg: #ffff;
+     $body-color: #495057;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: $body-color;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'luna-amber') { _%>
+     $primary: #ffb300;
+     $secondary: #c8c8c8;
+     $success: #34a835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #191919;
+     
+     // Body
+     $body-bg: #323232 !default;
+     $body-color: #f1f1f1;
+     
+     // Card
+     $card-bg: $body-bg !default;
+     $card-border-color: $body-bg !default;
+     
+     // Modal
+     $modal-content-bg: $body-bg !default;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: #ffff;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     $dropdown-bg: $body-bg;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'luna-blue') { _%>
+     $primary: #1f7ed0;
+     $secondary: #c8c8c8;
+     $success: #34a835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #191919;
+     
+     // Body
+     $body-bg: #323232 !default;
+     $body-color: #f1f1f1;
+     
+     // Card
+     $card-bg: $body-bg !default;
+     $card-border-color: $body-bg !default;
+     
+     // Modal
+     $modal-content-bg: $body-bg !default;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: #ffff;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     $dropdown-bg: $body-bg;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'luna-green') { _%>
+     $primary: #18803c;
+     $secondary: #c8c8c8;
+     $success: #34a835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #191919;
+     
+     // Body
+     $body-bg: #323232 !default;
+     $body-color: #f1f1f1;
+     
+     // Card
+     $card-bg: $body-bg !default;
+     $card-border-color: $body-bg !default;
+     
+     // Modal
+     $modal-content-bg: $body-bg !default;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: #ffff;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     $dropdown-bg: $body-bg;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'luna-pink') { _%>
+     $primary: #cc285c;
+     $secondary: #c8c8c8;
+     $success: #34a835;
+     $info: #007ad9;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $light: #f4f4f4;
+     $dark: #191919;
+     
+     // Body
+     $body-bg: #323232 !default;
+     $body-color: #f1f1f1;
+     
+     // Card
+     $card-bg: $body-bg !default;
+     $card-border-color: $body-bg !default;
+     
+     // Modal
+     $modal-content-bg: $body-bg !default;
+     
+     // Fonts
+     
+     $headings-color: #ffffff;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: #ffff;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     $dropdown-bg: $body-bg;
+     
+     // Navbar
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
+<%_ if (clientTheme === 'rhea') { _%>
+     
+     $primary: #005b9f;
+     $secondary: #c8c8c8;
+     $success: #34A835;
+     $info: #005b9f;
+     $warning: #ffba01;
+     $danger: #e91224;
+     $dark: #7B95A3;
+     
+     // Body
+     $body-bg: #ffff;
+     $body-color: #495057;
+     
+     // Fonts
+     
+     $headings-color: #495057;
+     
+     // Dropdowns
+     
+     $dropdown-link-color: $body-color;
+     $dropdown-link-hover-color: #ffff;
+     $dropdown-link-hover-bg: $primary;
+     
+     // Navbars
+     
+     $navbar-dark-color: rgba(#ffff, 0.8);
+     $navbar-dark-hover-color: #ffff;
+<%_ } _%>
