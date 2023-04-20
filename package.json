@@ -1,0 +1,73 @@
+{
+  "name": "generator-jhipster-travelx-blueprint",
+  "version": "0.0.1",
+  "description": "React blueprint for the travelx-catalog-platform",
+  "main": "generators/app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rahuljagdale204/jhipster_blueprint.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "jhipster-blueprint",
+    "jhipster-7"
+  ],
+  "author": "catalog-platform",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rahuljagdale204/jhipster_blueprint/issues"
+  },
+  "homepage": "https://github.com/Rahuljagdale204/jhipster_blueprint#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "ejs": "^3.1.9",
+    "eslint-config-airbnb": "^19.0.4",
+    "faker": "^6.6.6",
+    "generator-jhipster": "^7.9.3",
+    "glob": "^10.2.1",
+    "gulp-filter": "^7.0.0",
+    "insight": "^0.11.1",
+    "jhipster-core": "^7.3.4",
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "meow": "^11.0.0",
+    "mkdirp": "^3.0.0",
+    "needle": "^3.2.0",
+    "pluralize": "^8.0.0",
+    "randexp": "^0.5.3",
+    "semver": "^7.5.0",
+    "shelljs": "^0.8.5",
+    "through2": "^4.0.2",
+    "yeoman-environment": "^3.15.1",
+    "yeoman-generator": "^5.8.0"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.6.0",
+    "chai": "^4.3.7",
+    "ejs-lint": "^2.0.0",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "fs-extra": "^11.1.1",
+    "jsdoc": "^4.0.2",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.7",
+    "sinon": "^15.0.3",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^7.4.0"
+  },
+  "scripts": {
+        "lint": "eslint .",
+        "lint-fix": "npm run lint -- --fix",
+        "pretest": "npm run lint",
+        "test": "npm run test:unit -- test/*.spec.js",
+        "test:unit": "mocha --timeout 20000 --slow 0 --reporter spec",
+        "jsdoc": "jsdoc --configure jsdoc-conf.json",
+        "release": "git push && git push --tags && npm publish",
+        "release:patch": "npm version patch -a -m \"Update to %s\" && npm run release",
+        "release:minor": "npm version minor -a -m \"Update to %s\" && npm run release",
+        "release:major": "npm version major -a -m \"Update to %s\" && npm run release"
+    }
+}
