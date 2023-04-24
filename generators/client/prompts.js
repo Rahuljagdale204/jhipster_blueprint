@@ -16,14 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { yellow } from 'chalk';
+const chalk = require('chalk');
 
-export default {
+module.exports = {
     askForModuleName,
     askForClient,
     askFori18n,
     askForClientTheme,
-    askForClientThemeVariant
+    askForClientThemeVariant,
+    askForClientSideOpts,
 };
 
 function askForModuleName() {
@@ -40,21 +41,21 @@ function askForClient(meta) {
     const choices = [
         {
             value: 'react',
-            name: 'PrimeReact'
+            name: 'PrimeReact',
         },
         {
             value: 'no',
-            name: 'No client'
-        }
+            name: 'No client',
+        },
     ];
 
     const PROMPT = {
         type: 'list',
         name: 'clientFramework',
         when: response => applicationType !== 'microservice' && applicationType !== 'uaa',
-        message: `Which ${yellow('*Framework*')} would you like to use for the client?`,
+        message: `Which ${chalk.yellow('*Framework*')} would you like to use for the client?`,
         choices,
-        default: 'angularX'
+        default: 'angularX',
     };
 
     if (meta) return PROMPT; // eslint-disable-line consistent-return
@@ -76,7 +77,7 @@ function askFori18n() {
     this.aski18n(this);
 }
 
-// function askForClientSideOpts(meta) {}
+function askForClientSideOpts(meta) {}
 
 function askForClientTheme(meta) {
     if (!meta && this.existingProject) {
@@ -93,7 +94,7 @@ function askForClientTheme(meta) {
         { value: 'nova-colored', name: 'Nova Colored', clientThemeVariant: 'light' },
         { value: 'nova-dark', name: 'Nova Dark', clientThemeVariant: 'dark' },
         { value: 'nova-light', name: 'Nova Light', clientThemeVariant: 'light' },
-        { value: 'rhea', name: 'Rhea', clientThemeVariant: 'light' }
+        { value: 'rhea', name: 'Rhea', clientThemeVariant: 'light' },
     ];
 
     const PROMPT = {
@@ -102,7 +103,7 @@ function askForClientTheme(meta) {
         when: () => !skipClient,
         message: 'Which theme would you like to use for PrimeReact?',
         choices: defaultChoices,
-        default: 'nova-light'
+        default: 'nova-light',
     };
 
     promptQuestion(PROMPT, done, this);
@@ -132,7 +133,11 @@ function askForClientThemeVariant(meta) {
 
     const skipClient = this.skipClient;
 
-    const choices = [{ value: 'primary', name: 'Primary' }, { value: 'dark', name: 'Dark' }, { value: 'light', name: 'Light' }];
+    const choices = [
+        { value: 'primary', name: 'Primary' },
+        { value: 'dark', name: 'Dark' },
+        { value: 'light', name: 'Light' },
+    ];
 
     const PROMPT = {
         type: 'list',
@@ -140,7 +145,7 @@ function askForClientThemeVariant(meta) {
         when: () => !skipClient,
         message: 'Choose a Bootswatch variant navbar theme (https://bootswatch.com/)?',
         choices,
-        default: 'primary'
+        default: 'primary',
     };
 
     if (meta) return PROMPT; // eslint-disable-line consistent-return

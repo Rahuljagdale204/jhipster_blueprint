@@ -1,14 +1,14 @@
 /* eslint-disable consistent-return */
-import { yellow } from 'chalk';
-import EntityI18nGenerator from 'generator-jhipster/generators/entity-i18n';
-import { writeFiles } from './files';
+const chalk = require('chalk');
+const EntityI18nGenerator = require('generator-jhipster/generators/entity-i18n');
+const writeFiles = require('./files').writeFiles;
 
-export default class extends EntityI18nGenerator {
+module.exports = class extends EntityI18nGenerator {
     constructor(args, opts) {
         super(args, { fromBlueprint: true, ...opts }); // fromBlueprint variable is important
 
         if (!this.jhipsterContext) {
-            this.error(`This is a JHipster blueprint and should be used only like ${yellow('jhipster --blueprint helloworld')}`);
+            this.error(`This is a JHipster blueprint and should be used only like ${chalk.yellow('jhipster --blueprint helloworld')}`);
         }
     }
 
@@ -72,7 +72,7 @@ export default class extends EntityI18nGenerator {
         return {
             writeAdditionalFile() {
                 writeFiles.call(this);
-            }
+            },
         };
     }
 
@@ -85,4 +85,4 @@ export default class extends EntityI18nGenerator {
         // Here we are not overriding this phase and hence its being handled by JHipster
         return super._end();
     }
-}
+};

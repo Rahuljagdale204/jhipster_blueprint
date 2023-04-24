@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { kebabCase } from 'lodash';
-import Randexp from 'randexp';
-import { buildEnumInfo } from '../utils';
-import { ANGULAR_DIR, CLIENT_TEST_SRC_DIR as _CLIENT_TEST_SRC_DIR } from '../generator-constants';
+const _ = require('lodash');
+const Randexp = require('randexp');
+const utils = require('../utils');
+const constants = require('../generator-constants');
 
 /* Constants use throughout */
-const REACT_DIR = ANGULAR_DIR;
-const CLIENT_TEST_SRC_DIR = _CLIENT_TEST_SRC_DIR;
+const REACT_DIR = constants.ANGULAR_DIR;
+const CLIENT_TEST_SRC_DIR = constants.CLIENT_TEST_SRC_DIR;
 const CLIENT_REACT_TEMPLATES_DIR = 'react';
 
 /**
@@ -39,32 +39,32 @@ const reactFiles = {
                 {
                     file: 'entities/entity-detail.tsx',
                     method: 'processJsx',
-                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-detail.tsx`
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-detail.tsx`,
                 },
                 {
                     file: 'entities/entity.tsx',
                     method: 'processJsx',
-                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}.tsx`
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}.tsx`,
                 },
                 {
                     file: 'entities/entity-template.tsx',
                     method: 'processJsx',
-                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-template.tsx`
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-template.tsx`,
                 },
                 {
                     file: 'entities/entity.reducer.ts',
-                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}.reducer.ts`
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}.reducer.ts`,
                 },
                 {
                     file: 'entities/entity.model.ts',
-                    renameTo: generator => `shared/model/${generator.entityModelFileName}.model.ts`
+                    renameTo: generator => `shared/model/${generator.entityModelFileName}.model.ts`,
                 },
                 {
                     file: 'entities/index.tsx',
                     method: 'processJsx',
-                    renameTo: generator => `entities/${generator.entityFolderName}/index.tsx`
-                }
-            ]
+                    renameTo: generator => `entities/${generator.entityFolderName}/index.tsx`,
+                },
+            ],
         },
         {
             condition: generator => !generator.readOnly,
@@ -73,10 +73,10 @@ const reactFiles = {
                 {
                     file: 'entities/entity-update.tsx',
                     method: 'processJsx',
-                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-update.tsx`
-                }
-            ]
-        }
+                    renameTo: generator => `entities/${generator.entityFolderName}/${generator.entityFileName}-update.tsx`,
+                },
+            ],
+        },
     ],
     test: [
         {
@@ -84,9 +84,9 @@ const reactFiles = {
             templates: [
                 {
                     file: 'spec/app/entities/entity-reducer.spec.ts',
-                    renameTo: generator => `spec/app/entities/${generator.entityFolderName}/${generator.entityFileName}-reducer.spec.ts`
-                }
-            ]
+                    renameTo: generator => `spec/app/entities/${generator.entityFolderName}/${generator.entityFileName}-reducer.spec.ts`,
+                },
+            ],
         },
         {
             condition: generator => generator.protractorTests,
@@ -94,13 +94,13 @@ const reactFiles = {
             templates: [
                 {
                     file: 'e2e/entities/entity-page-object.ts',
-                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}.page-object.ts`
+                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}.page-object.ts`,
                 },
                 {
                     file: 'e2e/entities/entity.spec.ts',
-                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}.spec.ts`
-                }
-            ]
+                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}.spec.ts`,
+                },
+            ],
         },
         {
             condition: generator => generator.protractorTests && !generator.readOnly,
@@ -108,22 +108,22 @@ const reactFiles = {
             templates: [
                 {
                     file: 'e2e/entities/entity-update-page-object.ts',
-                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}-update.page-object.ts`
-                }
-            ]
-        }
-    ]
+                    renameTo: generator => `e2e/entities/${generator.entityFolderName}/${generator.entityFileName}-update.page-object.ts`,
+                },
+            ],
+        },
+    ],
 };
 
-export default {
-    writeFiles
+module.exports = {
+    writeFiles,
 };
 
 function addEnumerationFiles(generator, templateDir, clientFolder) {
     generator.fields.forEach(field => {
         if (field.fieldIsEnum === true) {
-            const enumFileName = kebabCase(field.fieldType);
-            const enumInfo = buildEnumInfo(field, generator.angularAppName, generator.packageName, generator.clientRootFolder);
+            const enumFileName = _.kebabCase(field.fieldType);
+            const enumInfo = utils.buildEnumInfo(field, generator.angularAppName, generator.packageName, generator.clientRootFolder);
             if (!generator.skipClient) {
                 generator.template(
                     `${generator.fetchFromInstalledJHipster(

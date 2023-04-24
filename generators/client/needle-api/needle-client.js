@@ -16,13 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import needleBase from 'generator-jhipster/generators/needle-base';
+const needleBase = require('generator-jhipster/generators/needle-base');
 
-import { CLIENT_MAIN_SRC_DIR as _CLIENT_MAIN_SRC_DIR } from '../../generator-constants';
+const constants = require('../../generator-constants');
 
-const CLIENT_MAIN_SRC_DIR = _CLIENT_MAIN_SRC_DIR;
+const CLIENT_MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
 
-export default class extends needleBase {
+module.exports = class extends needleBase {
     addStyle(style, comment, filePath, needle) {
         const styleBlock = this._mergeStyleAndComment(style, comment);
         const rewriteFileModel = this.generateFileModel(filePath, needle, styleBlock);
@@ -55,4 +55,4 @@ export default class extends needleBase {
 
         this.addBlockContentToFile(rewriteFileModel, errorMessage);
     }
-}
+};

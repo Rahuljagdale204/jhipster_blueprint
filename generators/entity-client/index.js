@@ -1,14 +1,14 @@
 /* eslint-disable consistent-return */
-import { yellow } from 'chalk';
-import EntityClientGenerator from 'generator-jhipster/generators/entity-client';
-import { writeFiles } from './files';
+const chalk = require('chalk');
+const EntityClientGenerator = require('generator-jhipster/generators/entity-client');
+const writeFiles = require('./files').writeFiles;
 
-export default class extends EntityClientGenerator {
+module.exports = class extends EntityClientGenerator {
     constructor(args, opts) {
         super(args, { fromBlueprint: true, ...opts }); // fromBlueprint variable is important
 
         if (!this.jhipsterContext) {
-            this.error(`This is a JHipster blueprint and should be used only like ${yellow('jhipster --blueprint primereact')}`);
+            this.error(`This is a JHipster blueprint and should be used only like ${chalk.yellow('jhipster --blueprint primereact')}`);
         }
     }
 
@@ -72,7 +72,7 @@ export default class extends EntityClientGenerator {
         return {
             writeAdditionalFile() {
                 writeFiles.call(this);
-            }
+            },
         };
     }
 
@@ -85,4 +85,4 @@ export default class extends EntityClientGenerator {
         // Here we are not overriding this phase and hence its being handled by JHipster
         return super._end();
     }
-}
+};

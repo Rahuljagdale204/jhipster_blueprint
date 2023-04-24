@@ -106,24 +106,24 @@ const JHIPSTER_DOCUMENTATION_ARCHIVE_PATH = '/documentation-archive/';
 const SQL_DB_OPTIONS = [
     {
         value: 'mysql',
-        name: 'MySQL'
+        name: 'MySQL',
     },
     {
         value: 'mariadb',
-        name: 'MariaDB'
+        name: 'MariaDB',
     },
     {
         value: 'postgresql',
-        name: 'PostgreSQL'
+        name: 'PostgreSQL',
     },
     {
         value: 'oracle',
-        name: 'Oracle (Please follow our documentation to use the Oracle proprietary driver)'
+        name: 'Oracle (Please follow our documentation to use the Oracle proprietary driver)',
     },
     {
         value: 'mssql',
-        name: 'Microsoft SQL Server'
-    }
+        name: 'Microsoft SQL Server',
+    },
 ];
 
 const LANGUAGES = [
@@ -131,49 +131,49 @@ const LANGUAGES = [
         name: 'Albanian',
         dispName: 'Shqip',
         value: 'al',
-        momentLocaleId: 'sq'
+        momentLocaleId: 'sq',
     },
     {
         name: 'Arabic (Libya)',
         dispName: 'العربية',
         value: 'ar-ly',
         rtl: true,
-        skipForLocale: true
+        skipForLocale: true,
     },
     {
         name: 'Armenian',
         dispName: 'Հայերեն',
         value: 'hy',
-        momentLocaleId: 'hy-am'
+        momentLocaleId: 'hy-am',
     },
     {
         name: 'Belarusian',
         dispName: 'Беларускі',
         value: 'by',
-        momentLocaleId: 'be-by'
+        momentLocaleId: 'be-by',
     },
     {
         name: 'Bengali',
         dispName: 'বাংলা',
         value: 'bn',
-        momentLocaleId: 'bn-bd'
+        momentLocaleId: 'bn-bd',
     },
     {
         name: 'Catalan',
         dispName: 'Català',
-        value: 'ca'
+        value: 'ca',
     },
     {
         name: 'Chinese (Simplified)',
         dispName: '中文（简体）',
         value: 'zh-cn',
-        localeId: 'zh-Hans'
+        localeId: 'zh-Hans',
     },
     {
         name: 'Chinese (Traditional)',
         dispName: '繁體中文',
         value: 'zh-tw',
-        localeId: 'zh-Hant'
+        localeId: 'zh-Hant',
     },
     { name: 'Czech', dispName: 'Český', value: 'cs' },
     { name: 'Danish', dispName: 'Dansk', value: 'da' },
@@ -184,7 +184,7 @@ const LANGUAGES = [
         name: 'Farsi',
         dispName: 'فارسی',
         value: 'fa',
-        rtl: true
+        rtl: true,
     },
     { name: 'Finnish', dispName: 'Suomi', value: 'fi' },
     { name: 'French', dispName: 'Français', value: 'fr' },
@@ -204,7 +204,7 @@ const LANGUAGES = [
         */
         value: 'in',
         localeId: 'id',
-        momentLocaleId: 'id'
+        momentLocaleId: 'id',
     },
     { name: 'Italian', dispName: 'Italiano', value: 'it' },
     { name: 'Japanese', dispName: '日本語', value: 'ja' },
@@ -216,13 +216,13 @@ const LANGUAGES = [
         name: 'Portuguese (Brazilian)',
         dispName: 'Português (Brasil)',
         value: 'pt-br',
-        localeId: 'pt'
+        localeId: 'pt',
     },
     {
         name: 'Portuguese',
         dispName: 'Português',
         value: 'pt-pt',
-        localeId: 'pt-PT'
+        localeId: 'pt-PT',
     },
     { name: 'Romanian', dispName: 'Română', value: 'ro' },
     { name: 'Russian', dispName: 'Русский', value: 'ru' },
@@ -239,21 +239,21 @@ const LANGUAGES = [
         dispName: 'Українська',
         value: 'ua',
         localeId: 'uk',
-        momentLocaleId: 'uk'
+        momentLocaleId: 'uk',
     },
     {
         name: 'Uzbek (Cyrillic)',
         dispName: 'Ўзбекча',
         value: 'uz-Cyrl-uz',
-        localeId: 'uz-Cyrl'
+        localeId: 'uz-Cyrl',
     },
     {
         name: 'Uzbek (Latin)',
         dispName: 'O`zbekcha',
         value: 'uz-Latn-uz',
-        localeId: 'uz-Latn'
+        localeId: 'uz-Latn',
     },
-    { name: 'Vietnamese', dispName: 'Tiếng Việt', value: 'vi' }
+    { name: 'Vietnamese', dispName: 'Tiếng Việt', value: 'vi' },
 ];
 
 const constants = {
@@ -344,7 +344,7 @@ const constants = {
     HELM_MYSQL,
     HELM_MARIADB,
     HELM_POSTGRESQL,
-    HELM_MOGODB_REPLICASET
+    HELM_MOGODB_REPLICASET,
 };
 
 module.exports = constants;

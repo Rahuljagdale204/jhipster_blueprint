@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { yellow } from 'chalk';
-import { startCase } from 'lodash';
-import needleClient from './needle-client';
-import { CLIENT_MAIN_SRC_DIR as _CLIENT_MAIN_SRC_DIR } from '../../generator-constants';
+const chalk = require('chalk');
+const _ = require('lodash');
+const needleClient = require('./needle-client');
+const constants = require('../../generator-constants');
 
-const CLIENT_MAIN_SRC_DIR = _CLIENT_MAIN_SRC_DIR;
+const CLIENT_MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
 
-export default class extends needleClient {
+module.exports = class extends needleClient {
     addElementTranslationKey(key, value, language) {
         const errorMessage = ' not added as a new entity in the menu.';
         this._addTranslationKey(key, value, language, errorMessage, 'jhipster-needle-menu-add-element');
@@ -40,10 +40,10 @@ export default class extends needleClient {
     }
 
     _addTranslationKey(key, value, language, errorMessage, needle) {
-        const fullErrorMessage = `${yellow(' Reference to ') + language} ${yellow(errorMessage)}`;
+        const fullErrorMessage = `${chalk.yellow(' Reference to ') + language} ${chalk.yellow(errorMessage)}`;
         const fullPath = `${CLIENT_MAIN_SRC_DIR}i18n/${language}/global.json`;
-        const rewriteFileModel = this.generateFileModel(fullPath, needle, `"${key}": "${startCase(value)}",`);
+        const rewriteFileModel = this.generateFileModel(fullPath, needle, `"${key}": "${_.startCase(value)}",`);
 
         this.addBlockContentToFile(rewriteFileModel, fullErrorMessage);
     }
-}
+};

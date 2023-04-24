@@ -16,13 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import needleClient from './needle-client';
-import { CLIENT_MAIN_SRC_DIR as _CLIENT_MAIN_SRC_DIR, CLIENT_WEBPACK_DIR as _CLIENT_WEBPACK_DIR } from '../../generator-constants';
+const needleClient = require('./needle-client');
+const constants = require('../../generator-constants');
 
-const CLIENT_MAIN_SRC_DIR = _CLIENT_MAIN_SRC_DIR;
-const CLIENT_WEBPACK_DIR = _CLIENT_WEBPACK_DIR;
+const CLIENT_MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
+const CLIENT_WEBPACK_DIR = constants.CLIENT_WEBPACK_DIR;
 
-export default class extends needleClient {
+module.exports = class extends needleClient {
     copyExternalAssets(sourceFolder, targetFolder) {
         const errorMessage = 'Resource path not added to JHipster app.';
         const from = `${CLIENT_MAIN_SRC_DIR}content/${sourceFolder}/`;
@@ -36,4 +36,4 @@ export default class extends needleClient {
 
         this.addBlockContentToFile(rewriteFileModel, errorMessage);
     }
-}
+};

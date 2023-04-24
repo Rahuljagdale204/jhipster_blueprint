@@ -17,19 +17,19 @@
  * limitations under the License.
  */
 
-import { join } from 'path';
-import { test } from 'shelljs';
-import { renderFile, render as _render } from 'ejs';
-import { kebabCase, repeat, lowerFirst } from 'lodash';
-import { FileUtils } from 'jhipster-core';
-import { readFileSync } from 'fs';
-import { randomBytes } from 'crypto';
-import randexp from 'randexp';
-import { random } from 'faker';
+const path = require('path');
+const shelljs = require('shelljs');
+const ejs = require('ejs');
+const _ = require('lodash');
+const jhiCore = require('jhipster-core');
+const fs = require('fs');
+const crypto = require('crypto');
+const randexp = require('randexp');
+const faker = require('faker');
 
-import { CLIENT_MAIN_SRC_DIR, SQL_DB_OPTIONS } from './generator-constants';
+const constants = require('./generator-constants');
 
-const LANGUAGES_MAIN_SRC_DIR = `${__dirname}/languages/templates/${CLIENT_MAIN_SRC_DIR}`;
+const LANGUAGES_MAIN_SRC_DIR = `${__dirname}/languages/templates/${constants.CLIENT_MAIN_SRC_DIR}`;
 
 class RandexpWithFaker extends randexp {
     constructor(regexp, m) {
@@ -39,11 +39,11 @@ class RandexpWithFaker extends randexp {
 
     // In order to have consistent results with RandExp, the RNG is seeded.
     randInt(min, max) {
-        return random.number({ min, max });
+        return faker.random.number({ min, max });
     }
 }
 
-export default {
+module.exports = {
     rewrite,
     rewriteFile,
     replaceContent,
@@ -65,7 +65,7 @@ export default {
     parseBluePrints,
     normalizeBlueprintName,
     stringHashCode,
-    RandexpWithFaker
+    RandexpWithFaker,
 };
 
 /**
@@ -75,7 +75,7 @@ export default {
  */
 function rewriteFile(args, generator) {
     args.path = args.path || process.cwd();
-    const fullPath = join(args.path, args.file);
+    const fullPath = path.join(args.path, args.file);
 
     args.haystack = generator.fs.read(fullPath);
     const body = rewrite(args);
@@ -90,7 +90,7 @@ function rewriteFile(args, generator) {
  */
 function replaceContent(args, generator) {
     args.path = args.path || process.cwd();
-    const fullPath = join(args.path, args.file);
+    const fullPath = path.join(args.path, args.file);
 
     const re = args.regex ? new RegExp(args.pattern, 'g') : args.pattern;
 
@@ -187,27 +187,27 @@ function rewriteJSONFile(filePath, rewriteFile, generator) {
  * @param {object} opt options
  * @param {any} template template
  */
-function copyWebResource(source, dest, regex, type, generator, opt = {}, template) {
+function copyWebResource(source, dest, regex, type, generator, opt = {}) {
     if (generator.enableTranslation) {
         generator.template(source, dest, generator, opt);
     } else {
         renderContent(source, generator, generator, opt, body => {
             body = body.replace(regex, '');
             switch (type) {
-            case 'html':
-                body = replacePlaceholders(body, generator);
-                break;
-            case 'js':
-                body = replaceTitle(body, generator);
-                if (dest.endsWith('error.route.ts')) {
-                    body = replaceErrorMessage(body, generator);
-                }
-                break;
-            case 'jsx':
-                body = replaceTranslation(body, generator);
-                break;
-            default:
-                break;
+                case 'html':
+                    body = replacePlaceholders(body, generator);
+                    break;
+                case 'js':
+                    body = replaceTitle(body, generator);
+                    if (dest.endsWith('error.route.ts')) {
+                        body = replaceErrorMessage(body, generator);
+                    }
+                    break;
+                case 'jsx':
+                    body = replaceTranslation(body, generator);
+                    break;
+                default:
+                    break;
             }
             generator.fs.write(dest, body);
         });
@@ -224,7 +224,7 @@ function copyWebResource(source, dest, regex, type, generator, opt = {}, templat
  * @param {function} cb callback function
  */
 function renderContent(source, generator, context, options, cb) {
-    renderFile(generator.templatePath(source), context, options, (err, res) => {
+    ejs.renderFile(generator.templatePath(source), context, options, (err, res) => {
         if (!err) {
             cb(res);
         } else {
@@ -333,7 +333,7 @@ function replaceTranslation(body, generator) {
     };
 
     replaceRegex(/(\{translate\('([a-zA-Z0-9.\-_]+)'(, ?null, ?'.*')?\)\})/g, '""');
-    replaceRegex(/(translate\(\s*'([a-zA-Z0-9.\-_]+)'(,\s*(null|\{.*\}),?\s*('.*')?\s*)?\))/g, '\'\'');
+    replaceRegex(/(translate\(\s*'([a-zA-Z0-9.\-_]+)'(,\s*(null|\{.*\}),?\s*('.*')?\s*)?\))/g, "''");
 
     return body;
 }
@@ -348,7 +348,7 @@ function geti18nJson(key, generator) {
     const i18nDirectory = `${LANGUAGES_MAIN_SRC_DIR}i18n/en/`;
     const names = [];
     let result;
-    const namePrefix = kebabCase(key.split('.')[0]);
+    const namePrefix = _.kebabCase(key.split('.')[0]);
     if (['entity', 'error', 'footer'].includes(namePrefix)) {
         names.push('global');
         if (namePrefix === 'error') {
@@ -360,13 +360,13 @@ function geti18nJson(key, generator) {
     for (let i = 0; i < names.length; i++) {
         let filename = `${i18nDirectory + names[i]}.json`;
         let render;
-        if (!test('-f', filename)) {
+        if (!shelljs.test('-f', filename)) {
             filename = `${filename}.ejs`;
             render = true;
         }
         try {
             let file = generator.fs.read(filename);
-            file = render ? _render(file, generator, {}) : file;
+            file = render ? ejs.render(file, generator, {}) : file;
             file = JSON.parse(file);
             if (result === undefined) {
                 result = file;
@@ -418,12 +418,12 @@ function getJavadoc(text, indentSize) {
     if (text.includes('"')) {
         text = text.replace(/"/g, '\\"');
     }
-    let javadoc = `${repeat(' ', indentSize)}/**`;
+    let javadoc = `${_.repeat(' ', indentSize)}/**`;
     const rows = text.split('\n');
     for (let i = 0; i < rows.length; i++) {
-        javadoc = `${javadoc}\n${repeat(' ', indentSize)} * ${rows[i]}`;
+        javadoc = `${javadoc}\n${_.repeat(' ', indentSize)} * ${rows[i]}`;
     }
-    javadoc = `${javadoc}\n${repeat(' ', indentSize)} */`;
+    javadoc = `${javadoc}\n${_.repeat(' ', indentSize)} */`;
     return javadoc;
 }
 
@@ -436,7 +436,7 @@ function getJavadoc(text, indentSize) {
  */
 function buildEnumInfo(field, angularAppName, packageName, clientRootFolder) {
     const fieldType = field.fieldType;
-    field.enumInstance = lowerFirst(fieldType);
+    field.enumInstance = _.lowerFirst(fieldType);
     const enums = field.fieldValues.replace(/\s/g, '').split(',');
     const enumsWithCustomValue = getEnumsWithCustomValue(enums);
     return {
@@ -447,7 +447,7 @@ function buildEnumInfo(field, angularAppName, packageName, clientRootFolder) {
         enumsWithCustomValue,
         angularAppName,
         packageName,
-        clientRootFolder: clientRootFolder ? `${clientRootFolder}-` : ''
+        clientRootFolder: clientRootFolder ? `${clientRootFolder}-` : '',
     };
 }
 
@@ -495,9 +495,9 @@ function decodeBase64(string, encoding = 'utf-8') {
  */
 function getAllJhipsterConfig(generator, force, basePath = '') {
     let configuration = generator && generator.config ? generator.config.getAll() || {} : {};
-    const filePath = join(basePath || '', '.yo-rc.json');
-    if ((force || !configuration.baseName) && FileUtils.doesFileExist(filePath)) {
-        const yoRc = JSON.parse(readFileSync(filePath, { encoding: 'utf-8' }));
+    const filePath = path.join(basePath || '', '.yo-rc.json');
+    if ((force || !configuration.baseName) && jhiCore.FileUtils.doesFileExist(filePath)) {
+        const yoRc = JSON.parse(fs.readFileSync(filePath, { encoding: 'utf-8' }));
         configuration = yoRc['generator-jhipster'];
 
         // merge the blueprint configs if available
@@ -515,7 +515,7 @@ function getAllJhipsterConfig(generator, force, basePath = '') {
             get: key => configuration[key],
             set: (key, value) => {
                 configuration[key] = value;
-            }
+            },
         };
     }
     return configuration;
@@ -526,7 +526,7 @@ function getAllJhipsterConfig(generator, force, basePath = '') {
  * @param {string} db - db
  */
 function getDBTypeFromDBValue(db) {
-    if (SQL_DB_OPTIONS.map(db => db.value).includes(db)) {
+    if (constants.SQL_DB_OPTIONS.map(db => db.value).includes(db)) {
         return 'sql';
     }
     return db;
@@ -537,7 +537,7 @@ function getDBTypeFromDBValue(db) {
  * @param {int} len the length to use, defaults to 50
  */
 function getRandomHex(len = 50) {
-    return randomBytes(len).toString('hex');
+    return crypto.randomBytes(len).toString('hex');
 }
 /**
  * Generates a base64 secret from given string or random hex
@@ -604,7 +604,7 @@ function parseBlueprintInfo(blueprint) {
     }
     return {
         name: bpName,
-        version
+        version,
     };
 }
 

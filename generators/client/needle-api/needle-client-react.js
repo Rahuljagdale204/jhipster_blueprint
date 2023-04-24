@@ -16,27 +16,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { yellow } from 'chalk';
-import { startCase } from 'lodash';
+const chalk = require('chalk');
+const _ = require('lodash');
 
-import needleClientBase from './needle-client';
-import { CLIENT_MAIN_SRC_DIR as _CLIENT_MAIN_SRC_DIR } from '../../generator-constants';
+const needleClientBase = require('./needle-client');
+const constants = require('../../generator-constants');
 
-const CLIENT_MAIN_SRC_DIR = _CLIENT_MAIN_SRC_DIR;
+const CLIENT_MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
 
-export default class extends needleClientBase {
+module.exports = class extends needleClientBase {
     addAppSCSSStyle(style, comment) {
         const filePath = `${CLIENT_MAIN_SRC_DIR}app/app.scss`;
         this.addStyle(style, comment, filePath, 'jhipster-needle-scss-add-main');
     }
 
     addEntityToMenu(routerName, enableTranslation, entityTranslationKeyMenu) {
-        const errorMessage = `${yellow('Reference to ') + routerName} ${yellow('not added to menu.\n')}`;
+        const errorMessage = `${chalk.yellow('Reference to ') + routerName} ${chalk.yellow('not added to menu.\n')}`;
         const entityMenuPath = `${CLIENT_MAIN_SRC_DIR}app/shared/layout/menus/entities.tsx`;
         const entityEntry =
             // prettier-ignore
             this.generator.stripMargin(`|<MenuItem icon="asterisk" to="/${routerName}">
-                        |      ${enableTranslation ? `<Translate contentKey="global.menu.entities.${entityTranslationKeyMenu}" />` : `${startCase(routerName)}`}
+                        |      ${enableTranslation ? `<Translate contentKey="global.menu.entities.${entityTranslationKeyMenu}" />` : `${_.startCase(routerName)}`}
                         |    </MenuItem>`);
         const rewriteFileModel = this.generateFileModel(entityMenuPath, 'jhipster-needle-add-entity-to-menu', entityEntry);
 
@@ -48,7 +48,7 @@ export default class extends needleClientBase {
         const indexReducerPath = `${CLIENT_MAIN_SRC_DIR}app/shared/reducers/index.ts`;
 
         const errorMessage = path =>
-            `${yellow('Reference to ') + entityInstance + entityClass + entityFolderName + entityFileName} ${yellow(
+            `${chalk.yellow('Reference to ') + entityInstance + entityClass + entityFolderName + entityFileName} ${chalk.yellow(
                 `not added to ${path}.\n`
             )}`;
 
@@ -90,4 +90,4 @@ export default class extends needleClientBase {
         );
         this.addBlockContentToFile(reducerAddCombineRewriteFileModel, errorMessage(indexReducerPath));
     }
-}
+};
