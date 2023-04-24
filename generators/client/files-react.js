@@ -16,13 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const mkdirp = require('mkdirp');
-const constants = require('../generator-constants');
+import mkdirp from 'mkdirp';
+import { CLIENT_MAIN_SRC_DIR, CLIENT_TEST_SRC_DIR, ANGULAR_DIR } from '../generator-constants';
 
 /* Constants use throughout */
-const MAIN_SRC_DIR = constants.CLIENT_MAIN_SRC_DIR;
-const TEST_SRC_DIR = constants.CLIENT_TEST_SRC_DIR;
-const REACT_DIR = constants.ANGULAR_DIR;
+const MAIN_SRC_DIR = CLIENT_MAIN_SRC_DIR;
+const TEST_SRC_DIR = CLIENT_TEST_SRC_DIR;
+const REACT_DIR = ANGULAR_DIR;
 
 /**
  * The default is to use a file path string. It implies use of the template method.
@@ -400,7 +400,7 @@ const files = {
     ]
 };
 
-module.exports = {
+export default {
     writeFiles,
     files
 };

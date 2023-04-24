@@ -10,6 +10,14 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "overrides": [
+        {
+            "files": [
+                "test/**/*.js"
+            ],
+            "env": {
+                "mocha": true
+            }
+        }
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -20,6 +28,11 @@
         "react",
         "@typescript-eslint"
     ],
+    "settings": {
+        "react": {
+            "version": "18.2.0"
+        }
+    },
     "rules": {
         "indent": [
             "error",

@@ -16,15 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const chalk = require('chalk');
+import { yellow } from 'chalk';
 
-module.exports = {
+export default {
     askForModuleName,
     askForClient,
     askFori18n,
     askForClientTheme,
-    askForClientThemeVariant,
-    askForClientSideOpts
+    askForClientThemeVariant
 };
 
 function askForModuleName() {
@@ -53,7 +52,7 @@ function askForClient(meta) {
         type: 'list',
         name: 'clientFramework',
         when: response => applicationType !== 'microservice' && applicationType !== 'uaa',
-        message: `Which ${chalk.yellow('*Framework*')} would you like to use for the client?`,
+        message: `Which ${yellow('*Framework*')} would you like to use for the client?`,
         choices,
         default: 'angularX'
     };
@@ -77,7 +76,7 @@ function askFori18n() {
     this.aski18n(this);
 }
 
-function askForClientSideOpts(meta) {}
+// function askForClientSideOpts(meta) {}
 
 function askForClientTheme(meta) {
     if (!meta && this.existingProject) {

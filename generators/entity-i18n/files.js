@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const utils = require('../utils');
+import { buildEnumInfo } from '../utils';
 
 /**
  * The default is to use a file path string. It implies use of the template method.
  * For any other config an object { file:.., method:.., template:.. } can be used
  */
 
-module.exports = {
+export default {
     writeFiles
 };
 
@@ -31,7 +31,7 @@ function writeFiles() {
     // writeEnumFiles() {
     this.fields.forEach(field => {
         if (field.fieldIsEnum === true) {
-            const enumInfo = utils.buildEnumInfo(field, this.angularAppName, this.packageName, this.clientRootFolder);
+            const enumInfo = buildEnumInfo(field, this.angularAppName, this.packageName, this.clientRootFolder);
 
             // Copy for each
             if (!this.skipClient && this.enableTranslation) {

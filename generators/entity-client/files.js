@@ -16,14 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const _ = require('lodash');
-const Randexp = require('randexp');
-const utils = require('../utils');
-const constants = require('../generator-constants');
+import { kebabCase } from 'lodash';
+import Randexp from 'randexp';
+import { buildEnumInfo } from '../utils';
+import { ANGULAR_DIR, CLIENT_TEST_SRC_DIR as _CLIENT_TEST_SRC_DIR } from '../generator-constants';
 
 /* Constants use throughout */
-const REACT_DIR = constants.ANGULAR_DIR;
-const CLIENT_TEST_SRC_DIR = constants.CLIENT_TEST_SRC_DIR;
+const REACT_DIR = ANGULAR_DIR;
+const CLIENT_TEST_SRC_DIR = _CLIENT_TEST_SRC_DIR;
 const CLIENT_REACT_TEMPLATES_DIR = 'react';
 
 /**
@@ -115,15 +115,15 @@ const reactFiles = {
     ]
 };
 
-module.exports = {
+export default {
     writeFiles
 };
 
 function addEnumerationFiles(generator, templateDir, clientFolder) {
     generator.fields.forEach(field => {
         if (field.fieldIsEnum === true) {
-            const enumFileName = _.kebabCase(field.fieldType);
-            const enumInfo = utils.buildEnumInfo(field, generator.angularAppName, generator.packageName, generator.clientRootFolder);
+            const enumFileName = kebabCase(field.fieldType);
+            const enumInfo = buildEnumInfo(field, generator.angularAppName, generator.packageName, generator.clientRootFolder);
             if (!generator.skipClient) {
                 generator.template(
                     `${generator.fetchFromInstalledJHipster(

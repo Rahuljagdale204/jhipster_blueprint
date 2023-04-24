@@ -1,17 +1,17 @@
 /* eslint-disable consistent-return */
-const chalk = require('chalk');
-const ClientGenerator = require('generator-jhipster/generators/client');
-const writeReactFiles = require('./files-react').writeFiles;
-const prompts = require('./prompts');
+import { yellow } from 'chalk';
+import ClientGenerator from 'generator-jhipster/generators/client';
+import { writeFiles as writeReactFiles } from './files-react';
+import { askForClient as _askForClient, askForClientTheme as _askForClientTheme, askForClientSideOpts as _askForClientSideOpts } from './prompts';
 
-module.exports = class extends ClientGenerator {
+export default class extends ClientGenerator {
     constructor(args, opts) {
         super(args, { fromBlueprint: true, ...opts }); // fromBlueprint variable is important
 
         const jhContext = (this.jhipsterContext = this.options.jhipsterContext);
 
         if (!jhContext) {
-            this.error(`This is a JHipster blueprint and should be used only like ${chalk.yellow('jhipster --blueprint helloworld')}`);
+            this.error(`This is a JHipster blueprint and should be used only like ${yellow('jhipster --blueprint helloworld')}`);
         }
 
         this.configOptions = jhContext.configOptions || {};
@@ -66,9 +66,9 @@ module.exports = class extends ClientGenerator {
     get prompting() {
         // The prompting phase is being overriden so that we can ask our own questions
         return {
-            askForClient: prompts.askForClient,
-            askForClientTheme: prompts.askForClientTheme,
-            askForClientSideOpts: prompts.askForClientSideOpts,
+            askForClient: _askForClient,
+            askForClientTheme: _askForClientTheme,
+            askForClientSideOpts: _askForClientSideOpts,
 
             setSharedConfigOptions() {
                 this.configOptions.lastQuestion = this.currentQuestion;
@@ -116,4 +116,4 @@ module.exports = class extends ClientGenerator {
         // Here we are not overriding this phase and hence its being handled by JHipster
         return super._end();
     }
-};
+}
